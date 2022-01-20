@@ -6,7 +6,7 @@ from mibis import IBISFile
 models = ['sam4s pa0', 'sam4s pa12', 'sam4s ddp']
 filenames = {'sam4s':'data/sam4s16.ibs'}
 
-def IV_demo2_plot(model=models[0], typ=True, min=False, max=False,
+def IV_variation_demo_plot(model=models[0], typ=True, min=False, max=False,
                   Rload=100, Vload=0):
 
     Vdd = 3.3
@@ -36,7 +36,7 @@ def IV_demo2_plot(model=models[0], typ=True, min=False, max=False,
     ax.set_title(model_case.title)
 
 
-def IV_demo2():
-    interact(IV_demo2_plot, model=models,
+def IV_variation_demo():
+    interact(IV_variation_demo_plot, model=models,
              Rload=(10, 200, 10), Vload=(0, 3.5, 0.5),
              continuous_update=False)

@@ -1,3 +1,4 @@
 from .IV_demo1 import *
-from .IV_demo2 import *
-from .IV_demo3 import *
+from .IV_variation_demo import *
+from .IV_loading_demo import *
+from .IV_clamp_demo import *
