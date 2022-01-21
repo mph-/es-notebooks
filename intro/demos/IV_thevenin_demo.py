@@ -10,7 +10,7 @@ def IV_thevenin_demo_plot(R=50, Vdd=5):
 
     fig, ax = subplots(1)
     ax.plot(Voh, Ioh * 1e3, color='red')
-    ax.set_ylim(0, 250)
+    ax.set_ylim(-250, 250)
     ax.set_xlabel('Voltage (V)')
     ax.set_ylabel('Current (mA)')
     ax.grid(True)
@@ -18,5 +18,5 @@ def IV_thevenin_demo_plot(R=50, Vdd=5):
 def IV_thevenin_demo():
     interact(IV_thevenin_demo_plot,
              R=(10, 100, 10),
-             Vdd=(1, 5, 1),
+             Vdd=(0, 5, 1),
              continuous_update=False)

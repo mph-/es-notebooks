@@ -10,7 +10,7 @@ def IV_resistor_demo_plot(R=50):
 
     fig, ax = subplots(1)
     ax.plot(Voh, Ioh * 1e3, color='blue')
-    ax.set_ylim(-250, 0)
+    ax.set_ylim(-250, 250)
     ax.set_xlabel('Voltage (V)')
     ax.set_ylabel('Current (mA)')
     ax.grid(True)
