@@ -8,8 +8,8 @@ models = ['sam4s pa0', 'sam4s pa12', 'sam4s ddp']
 filenames = {'sam4s': 'data/sam4s16.ibs'}
 
 
-def risetime_demo2_plot(model=models[0], CL_pF=5, t_ns=1e-9,
-                        RT=50, VT=1.65):
+def risetime_demo2_plot(model=models[0], Cl_pF=5, t_ns=1e-9,
+                        Rt=50, Vt=1.65):
 
     Vdd = 3.3
     case = 'typ'
@@ -29,8 +29,8 @@ def risetime_demo2_plot(model=models[0], CL_pF=5, t_ns=1e-9,
 
     fig, axes = subplots(1, 2, figsize=(12, 5))
     model_case.output_IV_curves_plot(axes[0], high=True)
-    model_case.output_IV_load_plot(axes[0], Rload=RT, Vload=VT)
-    Vo, Io, Vl = model_case.step_rise(tx, Cload=CL_pF * 1e-12, RT=RT, VT=VT)
+    model_case.output_IV_load_plot(axes[0], Rload=Rt, Vload=Vt)
+    Vo, Io, Vl = model_case.step_rise(tx, Cload=Cl_pF * 1e-12, Rt=Rt, Vt=Vt)
 
     axes[1].plot(tx * 1e9, Vo)
     axes[1].set_xlabel('Time (ns)')
@@ -48,6 +48,6 @@ def risetime_demo2_plot(model=models[0], CL_pF=5, t_ns=1e-9,
 
 
 def risetime_demo2():
-    interact(risetime_demo2_plot, model=models, CL_pF=(5, 50, 5),
-             RT=[50, 100, 500, 1000],  VT=[0, 1.65, 3.3],
+    interact(risetime_demo2_plot, model=models, Cl_pF=(5, 50, 5),
+             Rt=[50, 100, 500, 1000],  Vt=[0, 1.65, 3.3],
              t_ns=(0, 2, 0.2), continuous_update=False)
