@@ -11,3 +11,6 @@ from .risetime_demo1 import *
 from .risetime_demo2 import *
 from .risetime_demo3 import *
 from .risetime_demo4 import *
+from .txline_demo1 import *
+from .txline_demo2 import *
+from .txline_demo3 import *
