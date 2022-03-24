@@ -29,7 +29,7 @@ class LosslessTxLine:
 
         return -self.GammaVl
 
-    def V(self, Vd, x, t):
+    def Vstep(self, Vd, x, t):
 
         Nbounces = int(t // self.T)
 
@@ -61,3 +61,36 @@ class LosslessTxLine:
             V += Vs
 
         return V
+
+    def Istep(self, Vd, x, t):
+
+        Nbounces = int(t // self.T)
+
+        Gammal = self.GammaIl
+        Gammas = self.GammaIs
+        T = self.T
+        v = self.v
+
+        Is = Vd / (self.Zs + self.Z0)
+
+        if (Nbounces & 1) == 0:
+            # Outward propagating pulse.
+
+            I = Is * (Gammal * Gammas) ** (Nbounces // 2) * \
+                ((x / v) <= (t - Nbounces * T))
+
+            for b in range(Nbounces // 2):
+                I += Is * (1 + Gammal) * (Gammal * Gammas)**b
+
+        else:
+            # Inward propagating pulse.
+
+            I = Is * Gammal * \
+                (Gammal * Gammas) ** (Nbounces // 2) * \
+                (((self.l - x) / v) <= (t - Nbounces * T))
+
+            for b in range((Nbounces - 1) // 2):
+                I += Is * (1 + Gammas) * Gammal * (Gammas * Gammal)**b
+            I += Is
+
+        return I
