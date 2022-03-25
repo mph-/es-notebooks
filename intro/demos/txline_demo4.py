@@ -9,6 +9,7 @@ def txline_demo4_plot(Z0=60, Zs=40, Zl=1e6, t_ns=0):
 
     # Driver voltage.
     Vd = 4.0
+    Vmax = Vd * 2
 
     txline = LosslessTxLine(Z0, Zs, Zl, l=1, v=2 * 3e8 / 3)
 
@@ -22,12 +23,16 @@ def txline_demo4_plot(Z0=60, Zs=40, Zl=1e6, t_ns=0):
     fig, axes = subplots(2, 2, figsize=(12, 6))
 
     axes[0, 0].plot(x, V)
+    axes[0, 0].plot(x[0], V[0], 'o', color='C0')
+    axes[0, 0].plot(x[-1], V[-1], 'o', color='C2')
     axes[0, 0].grid(True)
-    axes[0, 0].set_ylim(0, 7)
+    axes[0, 0].set_ylim(0, Vmax)
     #axes[0,0].set_xlabel('Distance (m)')
     axes[0, 0].set_ylabel('Voltage (V)')
 
     axes[1, 0].plot(x, I * 1e3, color='C1')
+    axes[1, 0].plot(x[0], I[0] * 1e3, 'o', color='C1')
+    axes[1, 0].plot(x[-1], I[-1] * 1e3, 'o', color='C3')
     axes[1, 0].grid(True)
     axes[1, 0].set_ylim(0, 100)
     axes[1, 0].set_xlabel('Distance (m)')
@@ -51,16 +56,23 @@ def txline_demo4_plot(Z0=60, Zs=40, Zl=1e6, t_ns=0):
             Vl[m] = txline.Vstep(Vd, 1, t1)
             Il[m] = txline.Istep(Vd, 1, t1)
 
+    dt = tv[1] - tv[0]
+    m = int(t / dt + 0.5)
+
     axes[0, 1].plot(tv * 1e9, Vs, label='source')
     axes[0, 1].plot(tv * 1e9, Vl, color='C2', label='load')
+    axes[0, 1].plot(t * 1e9, Vs[m], 'o', color='C0')
+    axes[0, 1].plot(t * 1e9, Vl[m], 'o', color='C2')
     axes[0, 1].grid(True)
-    axes[0, 1].set_ylim(0, 7)
+    axes[0, 1].set_ylim(0, Vmax)
     axes[0, 1].set_ylabel('Voltage (V)')
     axes[0, 1].set_xlim(0, 40)
     axes[0, 1].legend()
 
     axes[1, 1].plot(tv * 1e9, Is * 1e3, color='C1', label='source')
     axes[1, 1].plot(tv * 1e9, Il * 1e3, color='C3', label='load')
+    axes[1, 1].plot(t * 1e9, Is[m] * 1e3, 'o', color='C1')
+    axes[1, 1].plot(t * 1e9, Il[m] * 1e3, 'o', color='C3')
     axes[1, 1].grid(True)
     axes[1, 1].set_ylim(0, 100)
     axes[1, 1].set_xlabel('Time (ns)')
