@@ -1,10 +1,10 @@
 class LosslessTxLine:
 
-    def __init__(self, Z0, Zs, Zl, l=1, v=0.5 * 3e8):
+    def __init__(self, Z0, Rs, Rl, l=1, v=0.5 * 3e8):
 
         self.Z0 = Z0
-        self.Zs = Zs
-        self.Zl = Zl
+        self.Rs = Rs
+        self.Rl = Rl
         self.v = v
         self.l = l
         self.T = l / v
@@ -12,12 +12,12 @@ class LosslessTxLine:
     @property
     def GammaVs(self):
 
-        return (self.Zs - self.Z0) / (self.Zs + self.Z0)
+        return (self.Rs - self.Z0) / (self.Rs + self.Z0)
 
     @property
     def GammaVl(self):
 
-        return (self.Zl - self.Z0) / (self.Zl + self.Z0)
+        return (self.Rl - self.Z0) / (self.Rl + self.Z0)
 
     @property
     def GammaIs(self):
@@ -38,7 +38,7 @@ class LosslessTxLine:
         T = self.T
         v = self.v
 
-        Vs = Vd * self.Z0 / (self.Zs + self.Z0)
+        Vs = Vd * self.Z0 / (self.Rs + self.Z0)
 
         if (Nbounces & 1) == 0:
             # Outward propagating pulse.
@@ -71,7 +71,7 @@ class LosslessTxLine:
         T = self.T
         v = self.v
 
-        Is = Vd / (self.Zs + self.Z0)
+        Is = Vd / (self.Rs + self.Z0)
 
         if (Nbounces & 1) == 0:
             # Outward propagating pulse.

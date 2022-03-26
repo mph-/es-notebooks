@@ -5,13 +5,13 @@ from numpy import linspace, zeros, nan
 from .txline import LosslessTxLine
 
 
-def txline_demo4_plot(Z0=60, Zs=40, Zl=1e6, t_ns=0):
+def txline_demo4_plot(Z0=60, Rs=20, Rl=1e6, t_ns=0):
 
     # Driver voltage.
     Vd = 4.0
     Vmax = Vd * 2
 
-    txline = LosslessTxLine(Z0, Zs, Zl, l=1, v=2 * 3e8 / 3)
+    txline = LosslessTxLine(Z0, Rs, Rl, l=1, v=2 * 3e8 / 3)
 
     x = linspace(0, 1, 201)
 
@@ -27,7 +27,7 @@ def txline_demo4_plot(Z0=60, Zs=40, Zl=1e6, t_ns=0):
     axes[0, 0].plot(x[-1], V[-1], 'o', color='C2')
     axes[0, 0].grid(True)
     axes[0, 0].set_ylim(0, Vmax)
-    #axes[0,0].set_xlabel('Distance (m)')
+    # axes[0, 0].set_xlabel('Distance (m)')
     axes[0, 0].set_ylabel('Voltage (V)')
 
     axes[1, 0].plot(x, I * 1e3, color='C1')
@@ -85,7 +85,7 @@ def txline_demo4_plot(Z0=60, Zs=40, Zl=1e6, t_ns=0):
 
 def txline_demo4():
     interact(txline_demo4_plot, Z0=[50, 60, 80, 100],
-             Zs=[0, 10, 20, 30, 40, 50, 60, 80, 100],
-             Zl=[0, 10, 20, 30, 40, 50, 60, 80, 100, 1e6],
+             Rs=[0, 10, 20, 30, 40, 50, 60, 80, 100],
+             Rl=[0, 10, 20, 30, 40, 50, 60, 80, 100, 1000000],
              t_ns=(0, 40, 1),
              continuous_update=False)
