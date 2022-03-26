@@ -1,7 +1,7 @@
 # M. P. Hayes UCECE
 from ipywidgets import interact
 from matplotlib.pyplot import subplots
-from numpy import linspace, zeros, nan
+from numpy import array
 from .txline import LosslessTxLine
 
 
@@ -34,11 +34,14 @@ def txline_lattice_demo1_plot(Z0=60, Rs=20, Rl=1e6, t_ns=0):
 
     tp = t % txline.T
     if (Nbounces & 1) == 0:
-        axes.arrow(0, t0 * 1e9, tp * txline.v,
-                   tp * 1e9, color='C0', width=0.0001)
+        x = tp * txline.v
+        axes.plot((0, x), (t0 * 1e9, t * 1e9), color='C0')
     else:
-        axes.arrow(txline.l, t0 * 1e9, -tp * txline.v,
-                   tp * 1e9, color='C1', width=0.0001)
+        x = txline.l - tp * txline.v
+        axes.plot((txline.l, x), (t0 * 1e9, t * 1e9), color='C1')
+    axes.grid(True)
+    Vp = txline.Vpulse(Vd, t)
+    axes.annotate('%.1f V' % Vp, (x, t * 1e9 + 2))
 
 
 def txline_lattice_demo1():
