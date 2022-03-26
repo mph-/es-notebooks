@@ -19,6 +19,8 @@ def txline_lattice_demo1_plot(Z0=60, Rs=20, Rl=1e6, t_ns=0):
     axes.set_ylim(0, 40)
     axes.set_xlabel('Distance (m)')
     axes.set_ylabel('Time (ns)')
+    axes.set_title('$\Gamma_l = %.2f, \Gamma_s %.2f$' %
+                   (txline.GammaVl, txline.GammaVs))
 
     Nbounces = int(t // txline.T)
 
@@ -41,7 +43,14 @@ def txline_lattice_demo1_plot(Z0=60, Rs=20, Rl=1e6, t_ns=0):
         axes.plot((txline.l, x), (t0 * 1e9, t * 1e9), color='C1')
     axes.grid(True)
     Vp = txline.Vpulse(Vd, t)
-    axes.annotate('%.1f V' % Vp, (x, t * 1e9 + 2))
+    axes.plot(x, t * 1e9, 'o')
+
+    if abs(Vp) < 0.1:
+        Vtext = '%.2f V' % Vp
+    else:
+        Vtext = '%.1f V' % Vp
+
+    axes.annotate(Vtext, (x, t * 1e9 + 2))
 
 
 def txline_lattice_demo1():
