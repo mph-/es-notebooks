@@ -34,7 +34,7 @@ def txline_demo4_plot(Z0=60, Rs=20, Rl=1e6, t_ns=0):
     axes[1, 0].plot(x[0], I[0] * 1e3, 'o', color='C1')
     axes[1, 0].plot(x[-1], I[-1] * 1e3, 'o', color='C3')
     axes[1, 0].grid(True)
-    axes[1, 0].set_ylim(0, 100)
+    axes[1, 0].set_ylim(-100, 100)
     axes[1, 0].set_xlabel('Distance (m)')
     axes[1, 0].set_ylabel('Current (mA)')
 
@@ -74,7 +74,7 @@ def txline_demo4_plot(Z0=60, Rs=20, Rl=1e6, t_ns=0):
     axes[1, 1].plot(t * 1e9, Is[m] * 1e3, 'o', color='C1')
     axes[1, 1].plot(t * 1e9, Il[m] * 1e3, 'o', color='C3')
     axes[1, 1].grid(True)
-    axes[1, 1].set_ylim(0, 100)
+    axes[1, 1].set_ylim(-100, 100)
     axes[1, 1].set_xlabel('Time (ns)')
     axes[1, 1].set_ylabel('Current (mA)')
     axes[1, 1].set_xlim(0, 40)

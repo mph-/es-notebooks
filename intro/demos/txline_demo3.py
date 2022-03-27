@@ -24,14 +24,14 @@ def txline_demo3_plot(Z0=60, Rs=20, Rl=1e6, t_ns=0):
     axes[0].plot(x, V)
     axes[0].grid(True)
     axes[0].set_ylim(0, 7)
-    #axes[0].set_xlabel('Distance (m)')
+    # axes[0].set_xlabel('Distance (m)')
     axes[0].set_ylabel('Voltage (V)')
-    axes[0].set_title('$\Gamma_l = %.2f, \Gamma_s %.2f$' %
-                      (txline.GammaVl, txline.GammaVs))
+    axes[0].set_title('$\Gamma_l = %s, \Gamma_s = %s$' %
+                      (round(txline.GammaVl, 3), round(txline.GammaVs, 3)))
 
     axes[1].plot(x, I * 1e3, color='C1')
     axes[1].grid(True)
-    axes[1].set_ylim(0, 100)
+    axes[1].set_ylim(-100, 100)
     axes[1].set_xlabel('Distance (m)')
     axes[1].set_ylabel('Current (mA)')
 
