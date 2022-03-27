@@ -16,3 +16,4 @@ from .txline_demo2 import *
 from .txline_demo3 import *
 from .txline_demo4 import *
 from .txline_lattice_demo1 import *
+from .txline_risetime_demo1 import *
