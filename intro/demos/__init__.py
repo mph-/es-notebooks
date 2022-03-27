@@ -17,3 +17,6 @@ from .txline_demo3 import *
 from .txline_demo4 import *
 from .txline_lattice_demo1 import *
 from .txline_risetime_demo1 import *
+from .txline_termination_demo1 import *
+from .txline_source_termination_demo1 import *
+from .txline_receiver_termination_demo1 import *
