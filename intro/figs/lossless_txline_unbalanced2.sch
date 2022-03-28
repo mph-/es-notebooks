@@ -18,7 +18,7 @@ L5 5 6; right
 W 0_5 0_6; right
 C5 6 0_6; down=1.25
 
-W 6 7; right=0.5
-W 0_6 0_7; right=0.5
+L6 6 7; right
+W 0_6 0_7; right
 
 ; draw_nodes=connections, label_nodes=none, scale=0.8, label_ids=false, label_values=false
