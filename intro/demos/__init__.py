@@ -20,3 +20,4 @@ from .txline_risetime_demo1 import *
 from .txline_termination_demo1 import *
 from .txline_source_termination_demo1 import *
 from .txline_receiver_termination_demo1 import *
+from .txline_propagation_demo1 import *
