@@ -1,3 +1,7 @@
+V1 a 0 {4 * u(t)}; down
+Rs a 1; right
+W 0 0_1; right
+
 L1 1 2; right
 W 0_1 0_2; right
 C1 2 0_2; down=1.25
