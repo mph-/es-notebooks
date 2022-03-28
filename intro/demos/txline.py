@@ -43,12 +43,12 @@ class LosslessTxLine:
         if (Nbounces & 1) == 0:
             # Outward propagating pulse.
 
-            return Vs * (Gammal * Gammas)**Nbounces
+            return Vs * (Gammal * Gammas)**(Nbounces // 2)
 
         else:
             # Inward propagating pulse.
 
-            return Vs * Gammal * (Gammas * Gammal)**Nbounces
+            return Vs * Gammal * (Gammas * Gammal)**(Nbounces // 2)
 
     def Ipulse(self, Vd, t):
 

@@ -4,6 +4,8 @@ from matplotlib.pyplot import subplots
 from numpy import array
 from .txline import LosslessTxLine
 
+T_NS_MAX = 25
+
 
 def txline_lattice_demo1_plot(Z0=60, Rs=20, Rl=1e6, t_ns=0):
 
@@ -16,7 +18,7 @@ def txline_lattice_demo1_plot(Z0=60, Rs=20, Rl=1e6, t_ns=0):
 
     fig, axes = subplots(1, figsize=(12, 6))
     axes.set_xlim(0, txline.l)
-    axes.set_ylim(0, 40)
+    axes.set_ylim(0, T_NS_MAX)
     axes.set_xlabel('Distance (m)')
     axes.set_ylabel('Time (ns)')
     axes.set_title('$\Gamma_l = %s, \Gamma_s = %s$' %
@@ -52,5 +54,5 @@ def txline_lattice_demo1():
     interact(txline_lattice_demo1_plot, Z0=[50, 60, 80, 100],
              Rs=[0, 10, 20, 30, 40, 50, 60, 80, 100],
              Rl=[0, 10, 20, 30, 40, 50, 60, 80, 100, 1000000],
-             t_ns=(0, 40, 1),
+             t_ns=(0, T_NS_MAX, 1),
              continuous_update=False)
