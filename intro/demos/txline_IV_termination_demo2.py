@@ -2,7 +2,7 @@
 from ipywidgets import interact
 from matplotlib.pyplot import subplots
 from mibis import IBISFile
-from numpy import inf, linspace
+from numpy import inf, linspace, zeros
 
 filenames = {'sam4s': 'data/sam4s16.ibs'}
 
@@ -42,8 +42,17 @@ def txline_IV_termination_demo2_plot(Z0=60, R1=120):
     axes[0].set_title(model_case.title)
 
     tx = linspace(0, 10e-9, 301)
-    Vo, Io, Vl = model_case.step_rise(tx, Cload=5e-12, Rs=0,
-                                      Rt=Z0, Vt=Vt)
+    Vo = zeros(len(tx))
+    Io = zeros(len(tx))
+    Vl = zeros(len(tx))
+
+    mr = tx < 5e-9
+    Vo[mr], Io[mr], Vl[mr] = model_case.step_rise(tx[mr], Cload=5e-12, Rs=0,
+                                                  Rt=Z0, Vt=Vt)
+    mf = tx >= 5e-9
+    Vo[mf], Io[mf], Vl[mf] = model_case.step_fall(tx[mf], Cload=5e-12, Rs=0,
+                                                  Rt=Z0, Vt=Vt)
+
     axes[1].plot(tx * 1e9, Vl)
     axes[1].set_xlabel('Time (ns)')
     axes[1].set_ylabel('Voltage (V)')
