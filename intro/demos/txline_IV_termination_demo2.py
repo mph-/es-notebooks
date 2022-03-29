@@ -2,12 +2,12 @@
 from ipywidgets import interact
 from matplotlib.pyplot import subplots
 from mibis import IBISFile
-from numpy import inf
+from numpy import inf, linspace
 
 filenames = {'sam4s': 'data/sam4s16.ibs'}
 
 
-def txline_IV_termination_demo1_plot(Z0=60, R1=120):
+def txline_IV_termination_demo2_plot(Z0=60, R1=120):
 
     Vdd = 3.3
     case = 'typ'
@@ -36,14 +36,23 @@ def txline_IV_termination_demo1_plot(Z0=60, R1=120):
     model = ibisfile.model(modelname, Vdd)
     model_case = model.case(case=case)
 
-    fig, ax = subplots(1)
-    model_case.output_IV_curves_plot(ax)
-    model_case.output_IV_load_plot(ax, Rload=Z0, Vload=Vt)
-    ax.set_title(model_case.title)
+    fig, axes = subplots(1, 2, figsize=(12, 5))
+    model_case.output_IV_curves_plot(axes[0])
+    model_case.output_IV_load_plot(axes[0], Rload=Z0, Vload=Vt)
+    axes[0].set_title(model_case.title)
+
+    tx = linspace(0, 10e-9, 301)
+    Vo, Io, Vl = model_case.step_rise(tx, Cload=5e-12, Rs=0,
+                                      Rt=Z0, Vt=Vt)
+    axes[1].plot(tx * 1e9, Vl)
+    axes[1].set_xlabel('Time (ns)')
+    axes[1].set_ylabel('Voltage (V)')
+    axes[1].grid(True)
+    axes[1].set_ylim(0, 3.5)
 
 
-def txline_IV_termination_demo1():
-    interact(txline_IV_termination_demo1_plot,
+def txline_IV_termination_demo2():
+    interact(txline_IV_termination_demo2_plot,
              Z0=[60, 80, 100],
-             R1=[60, 80, 100, 120, 240, 1000000],
+             R1=[60, 80, 100, 120, 160, 200, 240, 1000000],
              continuous_update=False)
