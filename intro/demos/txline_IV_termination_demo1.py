@@ -2,15 +2,29 @@
 from ipywidgets import interact
 from matplotlib.pyplot import subplots
 from mibis import IBISFile
+from numpy import inf
 
-models = ['sam4s pa0', 'sam4s pa12', 'sam4s ddp']
 filenames = {'sam4s': 'data/sam4s16.ibs'}
 
 
-def IV_loading_demo_plot(model=models[0], RL=100, VL=0):
+def txline_IV_termination_demo1_plot(R1=120):
 
+    Z0 = 60
     Vdd = 3.3
     case = 'typ'
+    model = 'sam4s pa0'
+
+    if R1 == Z0:
+        R2 = inf
+        Vt = Vdd
+    else:
+        R2 = (R1 * Z0) / (R1 - Z0)
+        Vt = R2 * Vdd / (R1 + R2)
+
+        print('R2 = %s ohms, Vt = %s V' % (round(R2, 2), Vt))
+
+    if R2 is inf:
+        R2 = 1e8
 
     parts = model.split(' ')
     ibisfilename = filenames[parts[0]]
@@ -22,11 +36,11 @@ def IV_loading_demo_plot(model=models[0], RL=100, VL=0):
 
     fig, ax = subplots(1)
     model_case.output_IV_curves_plot(ax)
-    model_case.output_IV_load_plot(ax, Rload=RL, Vload=VL)
+    model_case.output_IV_load_plot(ax, Rload=Z0, Vload=Vt)
     ax.set_title(model_case.title)
 
 
-def IV_loading_demo():
-    interact(IV_loading_demo_plot, model=models,
-             RL=(10, 200, 10), VL=(0, 3.5, 0.5),
+def txline_IV_termination_demo1():
+    interact(txline_IV_termination_demo1_plot,
+             R1=[60, 80, 100, 120, 240, 1000000],
              continuous_update=False)
