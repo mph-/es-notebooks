@@ -15,4 +15,8 @@ O 2 0_2; down
 W 3 U2.in; right
 U2 inverter; right, l=
 O 0_2 0_3; right
+W vdd2 vdd3; right
+W vdd3 U2.vdd; down
+W U2.vss 0_4; down
+W 0_3 0_4; right
 ; draw_nodes=connections, label_nodes=none
