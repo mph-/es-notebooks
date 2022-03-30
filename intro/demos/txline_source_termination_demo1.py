@@ -5,7 +5,7 @@ from numpy import linspace, zeros, nan
 from .txline import LosslessTxLine
 
 
-def txline_source_termination_demo1_plot(Rs=60, t_ns=0):
+def txline_source_termination_demo1_plot(Ro=20, Rt=40, t_ns=0):
 
     Z0 = 60
     Rl = 1e6
@@ -15,7 +15,7 @@ def txline_source_termination_demo1_plot(Rs=60, t_ns=0):
     Vd = 4.0
     Vmax = Vd * 2
 
-    txline = LosslessTxLine(Z0, Rs, Rl, l=1, v=2 * 3e8 / 3)
+    txline = LosslessTxLine(Z0, Rt + Ro, Rl, l=1, v=2 * 3e8 / 3)
 
     x = linspace(0, 1, 201)
 
@@ -65,6 +65,7 @@ def txline_source_termination_demo1_plot(Rs=60, t_ns=0):
 
 def txline_source_termination_demo1():
     interact(txline_source_termination_demo1_plot,
-             Rs=[0, 10, 20, 30, 40, 50, 60, 80, 100],
+             Ro=[0, 10, 20, 30],
+             Rt=[0, 10, 20, 30, 40, 50, 60, 80, 100],
              t_ns=(0, 40, 1),
              continuous_update=False)
