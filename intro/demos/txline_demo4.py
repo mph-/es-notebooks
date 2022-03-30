@@ -4,6 +4,8 @@ from matplotlib.pyplot import subplots
 from numpy import linspace, zeros, nan
 from .txline import LosslessTxLine
 
+T_NS_MAX = 80
+
 
 def txline_demo4_plot(t_ns=0):
 
@@ -33,7 +35,7 @@ def txline_demo4_plot(t_ns=0):
     axes[0].set_xlabel('Distance (m)')
     axes[0].set_ylabel('Voltage (V)')
 
-    tv = linspace(0, 40e-9, 201)
+    tv = linspace(0, T_NS_MAX * 1e-9, 201)
     Vs = zeros(len(tv))
     Vl = zeros(len(tv))
 
@@ -54,14 +56,14 @@ def txline_demo4_plot(t_ns=0):
     axes[1].plot(t * 1e9, Vl[m], 'o', color='C2')
     axes[1].grid(True)
     axes[1].set_ylim(0, Vmax)
-    axes[0].set_xlabel('Time (ns)')
+    axes[1].set_xlabel('Time (ns)')
     axes[1].set_ylabel('Voltage (V)')
-    axes[1].set_xlim(0, 40)
+    axes[1].set_xlim(0, T_NS_MAX)
     axes[1].legend()
 
     fig.tight_layout()
 
 
 def txline_demo4():
-    interact(txline_demo4_plot, t_ns=(0, 40, 1),
+    interact(txline_demo4_plot, t_ns=(0, T_NS_MAX, 1),
              continuous_update=False)
