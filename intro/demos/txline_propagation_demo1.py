@@ -17,7 +17,10 @@ def txline_propagation_demo1_plot(timestep=0):
                  9: 'figs/lossless_txline_unbalanced3j.png',
                  10: 'figs/lossless_txline_unbalanced3k.png',
                  11: 'figs/lossless_txline_unbalanced3l.png',
-                 12: 'figs/lossless_txline_unbalanced3m.png'}
+                 12: 'figs/lossless_txline_unbalanced3m.png',
+                 13: 'figs/lossless_txline_unbalanced3n.png',
+                 14: 'figs/lossless_txline_unbalanced3o.png',
+                 15: 'figs/lossless_txline_unbalanced3p.png'}
 
     filename = filenames[timestep]
     image = Image(filename=filename)
@@ -25,5 +28,5 @@ def txline_propagation_demo1_plot(timestep=0):
 
 
 def txline_propagation_demo1():
-    interact(txline_propagation_demo1_plot, timestep=(0, 12, 1),
+    interact(txline_propagation_demo1_plot, timestep=(0, 15, 1),
              continuous_update=False)
