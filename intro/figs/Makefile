@@ -4,4 +4,4 @@ PNG = $(SCH:.sch=.png)
 all: $(PNG)
 
 %.png: %.sch
-	cd $(dir $@); schtex $(notdir $<) $(notdir $@)
+	cd $(dir $@); schtex $(notdir $<) $(notdir $@) --label-nodes=none
